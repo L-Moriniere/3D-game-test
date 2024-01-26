@@ -28,19 +28,19 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var speed = SPEED
-	
-	if Input.is_action_just_pressed("Crouch"):
+
+	if Input.is_action_pressed("Crouch"):
 		speed = CROUCH_SPEED
 		if !crouched:
 			$AnimationPlayer.play("crouch")
 			crouched = true
-		else:
-			if crouched:
-				var space_state = get_world_3d().direct_space_state
-				#verifie qu'il n'y a pas de collisions au dessus, si il n'y en le character peut se relever
-				var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(position, position + Vector3(0,2,0), 1, [self]))
-				if result.size() == 0:
-					$AnimationPlayer.play("uncrouch")
+	else:
+		if crouched:
+			var space_state = get_world_3d().direct_space_state
+			#verifie qu'il n'y a pas de collisions au dessus, si il n'y en le character peut se relever
+			var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(position, position + Vector3(0,2,0), 1, [self]))
+			if result.size() == 0:
+				$AnimationPlayer.play("uncrouch")
 				crouched = false
 				
 	if Input.is_action_just_pressed("Flashlight"):
@@ -48,7 +48,6 @@ func _physics_process(delta):
 			$AnimationPlayer.play("lantern_hide")
 		else :
 			$AnimationPlayer.play("lantern_show")
-			
 		lanternIsOut = !lanternIsOut
 		
 	if direction:
