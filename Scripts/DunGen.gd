@@ -8,6 +8,7 @@ extends Node3D
 func set_start(val : bool)->void:
 	if Engine.is_editor_hint():
 		generate()
+		$DunMesh.create_dungeon()
 	
 @export var border_size : int = 20 : set = set_border_size
 func set_border_size(val : int)->void:
@@ -45,8 +46,11 @@ func generate():
 	if custom_seed : set_seed(custom_seed)
 	
 	visualize_border()
+	make_start_room()
 	for i in room_number:
 		make_room(room_recursion)
+		
+
 		
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
 	var room_pos_v2 : PackedVector2Array = []
@@ -154,6 +158,39 @@ func create_hallways(hallway_graph : AStar2D):
 			if grid_map.get_cell_item(pos) < 0:
 				grid_map.set_cell_item(pos, 1)
 			
+			
+			
+func make_start_room():
+	#calcul de la longeur et largeur d'une piece
+	var width : int = 5
+	var height : int = 3
+	
+	#calcul de starting position
+	var start_pos : Vector3i
+
+	start_pos.x = 0
+	start_pos.z = 0
+	
+	#creation de la salle
+	var room : PackedVector3Array = []
+	
+	#ajout des tiles room
+	for row in height:
+		for column in width:
+			var pos : Vector3i = start_pos + Vector3i(column, 0, row)
+			#index 0 car c'est l'index de la room tile
+			grid_map.set_cell_item(pos, 0)
+			#store la position
+			room.append(pos)
+	#une fois placé on ajoute la salle
+	room_tiles.append(room)
+	
+	#avoir le centre de la salle
+	var avg_x : float = start_pos.x + (float(width)/2)
+	var avg_z : float = start_pos.z + (float(height)/2)
+	var pos : Vector3 = Vector3(avg_x, 0, avg_z)
+	room_positions.append(pos)
+
 func make_room(recursion : int):
 	if !recursion>0:
 		return
@@ -180,7 +217,7 @@ func make_room(recursion : int):
 	
 	var room : PackedVector3Array = []
 	
-	#ajout des tilles room
+	#ajout des tiles room
 	for row in height:
 		for column in width:
 			var pos : Vector3i = start_pos + Vector3i(column, 0, row)

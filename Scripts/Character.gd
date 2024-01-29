@@ -9,10 +9,12 @@ var crouched : bool =  false
 var lanternIsOut : bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+#var gravity = 0
 
 func _ready():
 	#enlever le curseur de la souris et la capturer 
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	pass
 
 func _physics_process(delta):
 	# Add the gravity.
