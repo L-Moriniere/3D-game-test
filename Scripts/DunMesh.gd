@@ -3,6 +3,8 @@ extends Node3D
 
 @export var grid_map_path : NodePath
 @onready var grid_map : GridMap = get_node(grid_map_path)
+@onready var lantern_instance = preload("res://Scenes/Lantern.tscn")
+@export_range(0,1) var survival_chance : float = 0.15
 
 @export var start : bool = false : set = set_start
 func set_start(val : bool )->void:
@@ -42,6 +44,12 @@ func create_dungeon():
 		if cell_index <= 2 && cell_index >=0 :
 			var dun_cell : Node3D = dun_cell_scene.instantiate()
 			dun_cell.position = Vector3(cell) + Vector3(0.5, 0, 0.5)
+			#ajouter lantern dans les salles uniquement
+			if cell_index == 0:
+				var kill : float = randf()
+				if survival_chance> kill:
+					var lantern : Node3D = lantern_instance.instantiate()
+					dun_cell.add_child(lantern)
 			add_child(dun_cell)
 			dun_cell.set_owner(owner)
 			t += 1

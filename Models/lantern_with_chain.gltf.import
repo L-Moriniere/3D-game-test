@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://8xox2p4ctrtk"
-path="res://.godot/imported/lantern_with_chain.gltf-d18b8bd8c37ae58fda81decbdf663151.scn"
+path="res://.godot/imported/lantern_with_chain.gltf-3a9d4836cc6e813aa5de7eb4f4a7d9f9.scn"
 
 [deps]
 
-source_file="res://Scenes/lantern_with_chain.gltf"
-dest_files=["res://.godot/imported/lantern_with_chain.gltf-d18b8bd8c37ae58fda81decbdf663151.scn"]
+source_file="res://Models/lantern_with_chain.gltf"
+dest_files=["res://.godot/imported/lantern_with_chain.gltf-3a9d4836cc6e813aa5de7eb4f4a7d9f9.scn"]
 
 [params]
 

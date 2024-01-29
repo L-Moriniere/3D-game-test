@@ -4,7 +4,7 @@
 [ext_resource type="Material" path="res://Models/ceiling.tres" id="2_hvwhu"]
 
 [node name="lantern" instance=ExtResource("1_n1kmp")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.072, 0)
 
 [node name="Plane" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_hvwhu")
@@ -13,6 +13,8 @@ surface_material_override/0 = ExtResource("2_hvwhu")
 surface_material_override/0 = ExtResource("2_hvwhu")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.739406, 0)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.739406, 0)
 light_color = Color(1, 0.701961, 0.164706, 1)
-light_energy = 0.2
+shadow_enabled = true
+shadow_bias = 0.2
+omni_range = 8.0
