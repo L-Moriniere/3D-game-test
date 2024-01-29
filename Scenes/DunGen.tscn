@@ -23,7 +23,6 @@ data = {
 }
 
 [node name="DunMesh" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191599, -0.234858, -0.363989)
 script = ExtResource("3_rrhih")
 grid_map_path = NodePath("../GridMap")
 

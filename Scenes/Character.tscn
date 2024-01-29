@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://354ptsg0qbj3"]
+[gd_scene load_steps=13 format=3 uid="uid://354ptsg0qbj3"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_21k54"]
+[ext_resource type="PackedScene" uid="uid://c5df0rxvm4krl" path="res://System/Interaction/PlayerInteractor.tscn" id="2_pnpyy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dx2gn"]
 
@@ -9,6 +10,9 @@ radius = 0.49393
 height = 1.14611
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_15vg7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1b0o"]
+size = Vector3(1.34241, 1.96008, 1.995)
 
 [sub_resource type="Animation" id="Animation_xewc8"]
 length = 0.001
@@ -318,6 +322,14 @@ shape = SubResource("CapsuleShape3D_15vg7")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633453, -0.172303)
 
+[node name="PlayerInteractor" parent="Camera3D" node_paths=PackedStringArray("player") instance=ExtResource("2_pnpyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.633453, 0.172303)
+player = NodePath("../..")
+
+[node name="CollisionShape3D" parent="Camera3D/PlayerInteractor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03302, 0.155823, -0.497494)
+shape = SubResource("BoxShape3D_h1b0o")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_k3oe0")
@@ -327,3 +339,5 @@ speed_scale = 1.5
 [node name="Lantern" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32158, 0.175313, -0.748307)
 light_energy = 0.0
+
+[editable path="Camera3D/PlayerInteractor"]
