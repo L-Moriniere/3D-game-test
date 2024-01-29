@@ -18,7 +18,6 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("Interact"):
-		print(cached_closest)
 		if cached_closest:
 			interact(cached_closest)
 

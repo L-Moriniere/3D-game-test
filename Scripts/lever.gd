@@ -4,6 +4,7 @@ var is_actionned : bool = false
 @onready var player : CharacterBody3D = $"../Character"
 @onready var start_position : Node3D = $"../PositionPlayerEnter"
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

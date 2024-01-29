@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://fofl1tdnkg5v"]
+[gd_scene load_steps=6 format=3 uid="uid://fofl1tdnkg5v"]
 
+[ext_resource type="Script" path="res://Scripts/TestScene.gd" id="1_4rv81"]
 [ext_resource type="PackedScene" uid="uid://354ptsg0qbj3" path="res://Scenes/Character.tscn" id="1_6jls4"]
 [ext_resource type="PackedScene" uid="uid://bc3is17pn416" path="res://Scenes/DunGen.tscn" id="2_upgan"]
 [ext_resource type="PackedScene" uid="uid://cfs2ucf44y5og" path="res://Scenes/Lever.tscn" id="3_8212w"]
+[ext_resource type="PackedScene" uid="uid://cwyu2l34cd7ih" path="res://Scenes/Lantern.tscn" id="4_fmtge"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_4rv81")
 
 [node name="DunGen" parent="." instance=ExtResource("2_upgan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28396, -0.0487952, 0.0359819)
@@ -24,3 +27,6 @@ size = Vector3(2.55225, 0.198364, 3.03101)
 
 [node name="PositionPlayerEnter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55113, 0.100908, 1.52819)
+
+[node name="lantern" parent="." instance=ExtResource("4_fmtge")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 2.30138)
