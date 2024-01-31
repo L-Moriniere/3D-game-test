@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fofl1tdnkg5v"]
+[gd_scene load_steps=9 format=3 uid="uid://fofl1tdnkg5v"]
 
 [ext_resource type="Script" path="res://Scripts/TestScene.gd" id="1_4rv81"]
 [ext_resource type="PackedScene" uid="uid://354ptsg0qbj3" path="res://Scenes/Character.tscn" id="1_6jls4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfs2ucf44y5og" path="res://Scenes/Lever.tscn" id="3_8212w"]
 [ext_resource type="PackedScene" uid="uid://cwyu2l34cd7ih" path="res://Scenes/Lantern.tscn" id="4_fmtge"]
 [ext_resource type="PackedScene" uid="uid://cmvvgc3bvb0ye" path="res://Scenes/Arch.tscn" id="6_1j0op"]
+[ext_resource type="PackedScene" uid="uid://bc7x4wyxclnv3" path="res://Scenes/Door.tscn" id="7_adyf1"]
 
 [sub_resource type="Environment" id="Environment_mh8f1"]
 background_mode = 1
@@ -51,5 +52,8 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 2.30138)
 
 [node name="Arch" parent="." instance=ExtResource("6_1j0op")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00099, -0.487065, -3.87416)
+
+[node name="Door" parent="." instance=ExtResource("7_adyf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.199782, 5.34268)
 
 [editable path="DunGen"]
