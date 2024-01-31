@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dboof2dl2ihn7"
-path="res://.godot/imported/untitled.glb-366c4440df010e25275eede91a7f7cb3.scn"
+uid="uid://cfah5tqacri37"
+path="res://.godot/imported/SmallArch_Blend.glb-dfc8bf4f41dfcb587211e9df4b1d9b53.scn"
 
 [deps]
 
-source_file="res://untitled.glb"
-dest_files=["res://.godot/imported/untitled.glb-366c4440df010e25275eede91a7f7cb3.scn"]
+source_file="res://Models/SmallArch_Blend.glb"
+dest_files=["res://.godot/imported/SmallArch_Blend.glb-dfc8bf4f41dfcb587211e9df4b1d9b53.scn"]
 
 [params]
 
