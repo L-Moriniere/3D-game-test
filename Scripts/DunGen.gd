@@ -53,12 +53,12 @@ func generate():
 	room_tiles.clear()
 	room_positions.clear()
 	if custom_seed : set_seed(custom_seed)
-	
-	print(get_random_rooms())
+	var random_room_exit_doors : Array[int] = get_random_rooms()
 	visualize_border()
+	print("----")
 	make_start_room()
 	for i in room_number:
-		make_room(room_recursion)
+		make_room(room_recursion, random_room_exit_doors)
 		
 		
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
@@ -200,7 +200,7 @@ func make_start_room():
 	var pos : Vector3 = Vector3(avg_x, 0, avg_z)
 	room_positions.append(pos)
 
-func make_room(recursion : int):
+func make_room(recursion : int, random_room_exit_doors : Array[int]):
 	if !recursion>0:
 		return
 	
@@ -221,19 +221,38 @@ func make_room(recursion : int):
 			var pos : Vector3i = start_pos + Vector3i(column, 0, row)
 			#si la cellule n'est pas une salle
 			if grid_map.get_cell_item(pos) == 0:
-				make_room(recursion-1)
+				make_room(recursion-1, random_room_exit_doors)
 				return
 	
 	var room : PackedVector3Array = []
 	
+	if random_room_exit_doors[0] == room_positions.size():
+		var exit_door_pos = get_exit_door_position(width, height)
+		printt(exit_door_pos)
+		for row in height:
+			for column in width:
+				var pos : Vector3i = start_pos + Vector3i(column, 0, row)
+				#index 0 car c'est l'index de la room tile
+				if row == exit_door_pos.z && column == exit_door_pos.x:
+					grid_map.set_cell_item(pos, 4)
+				else : 
+					grid_map.set_cell_item(pos, 0)
+				#store la position
+				room.append(pos)
+				
+		if random_room_exit_doors.size() != 1:
+			random_room_exit_doors.remove_at(0)
+			
+			
 	#ajout des tiles room
-	for row in height:
-		for column in width:
-			var pos : Vector3i = start_pos + Vector3i(column, 0, row)
-			#index 0 car c'est l'index de la room tile
-			grid_map.set_cell_item(pos, 0)
-			#store la position
-			room.append(pos)
+	else:
+		for row in height:
+			for column in width:
+				var pos : Vector3i = start_pos + Vector3i(column, 0, row)
+				#index 0 car c'est l'index de la room tile
+				grid_map.set_cell_item(pos, 0)
+				#store la position
+				room.append(pos)
 	#une fois placé on ajoute la salle
 	room_tiles.append(room)
 	
@@ -253,7 +272,29 @@ func get_random_rooms()->Array[int]:
 		# Assurez-vous que la nouvelle valeur est distincte des valeurs déjà présentes dans le tableau
 		if r not in array_rooms:
 			array_rooms.append(r)
-
+	array_rooms.sort()
 	return array_rooms
 
-	
+func get_exit_door_position(width, height):
+	# Choisissez aléatoirement une des quatre bordures (0: haut, 1: droite, 2: bas, 3: gauche)
+	var border_room : int = randi_range(0, 3)
+
+	var x : int = 0
+	var z : int = 0
+
+	# Générez une coordonnée le long de la bordure choisie
+	match border_room:
+		0:  # Haut
+			x = randi_range(0, width)
+			z = 0
+		1:  # Droite
+			x = width
+			z = randi_range(0, height)
+		2:  # Bas
+			x = randi_range(0, width)
+			z = height
+		3:  # Gauche
+			x = 0
+			z = randi_range(0, height)
+			
+	return Vector3i(x,0,z)
