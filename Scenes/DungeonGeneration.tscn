@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://2772q7r2j0rc"]
+[gd_scene load_steps=7 format=3 uid="uid://2772q7r2j0rc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6qtuc"]
 
@@ -7,6 +7,9 @@ albedo_color = Color(1, 0.658824, 0.466667, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsaea"]
 albedo_color = Color(0, 0.886275, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjbf6"]
+albedo_color = Color(0.709804, 0, 0.862745, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vy2fb"]
 albedo_color = Color(0, 0.960784, 0.847059, 1)
@@ -24,6 +27,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fi556")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 mesh = SubResource("BoxMesh_6qtuc")
 surface_material_override/0 = SubResource("StandardMaterial3D_rsaea")
+
+[node name="ExitTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02649)
+mesh = SubResource("BoxMesh_6qtuc")
+surface_material_override/0 = SubResource("StandardMaterial3D_rjbf6")
 
 [node name="DoorTile" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

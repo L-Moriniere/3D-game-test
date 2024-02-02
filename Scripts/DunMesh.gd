@@ -4,7 +4,9 @@ extends Node3D
 @export var grid_map_path : NodePath
 @onready var grid_map : GridMap = get_node(grid_map_path)
 @onready var lantern_instance = preload("res://Scenes/Lantern.tscn")
-@export_range(0,1) var survival_chance : float = 0.15
+@export_range(0,1) var survival_chance_lantern : float = 0.15
+
+
 
 @export var start : bool = false : set = set_start
 func set_start(val : bool )->void:
@@ -21,7 +23,7 @@ var directions : Dictionary = {
 #si la cellule voisine n'appartient pas un des 3 types concernés
 func handle_all(cell : Node3D, dir : String, key : String):
 	match key:
-		"" : cell.call("remove_door_"+dir)
+		"" : cell.call("remove_door_"+dir); cell.call("remove_door_exit_"+dir)
 		"00" : cell.call("remove_wall_"+dir); cell.call("remove_door_"+dir)
 		"01" : cell.call("remove_door_"+dir)
 		"02" : cell.call("remove_wall_"+dir); cell.call("remove_door_"+dir)
@@ -38,20 +40,26 @@ func create_dungeon():
 		remove_child(c)
 		c.queue_free()
 	var t : int = 0
+	#var number_cell_room : int = grid_map.get_used_cells_by_item(0).size()
+	#var rand_cell : int = randi_range(0, number_cell_room)
+	#var count_cell : int = 0
+
 	for cell in  grid_map.get_used_cells():
 		var cell_index : int = grid_map.get_cell_item(cell)
 		#si la cell n'est pas vide ou en border
 		if cell_index <= 2 && cell_index >=0 :
 			var dun_cell : Node3D = dun_cell_scene.instantiate()
 			dun_cell.position = Vector3(cell) + Vector3(0.5, 0, 0.5)
-			#ajouter lantern dans les salles uniquement
+			#si c'est une salle
 			if cell_index == 0:
+				#ajout lanterne
 				var kill : float = randf()
-				if survival_chance> kill:
+				if survival_chance_lantern > kill:
 					var lantern : Node3D = lantern_instance.instantiate()
 					dun_cell.add_child(lantern)
-			add_child(dun_cell)
-			dun_cell.set_owner(owner)
+					
+							
+			
 			t += 1
 			for i in 4:
 				var cell_n : Vector3i = cell + directions.values()[i]
@@ -62,6 +70,12 @@ func create_dungeon():
 				else:
 					var key : String = str(cell_index) + str(cell_n_index)
 					handle_all(dun_cell, directions.keys()[i], key)
+				
+					
+					
+			add_child(dun_cell)
+			dun_cell.set_owner(owner)
 		if t%10 == 9 : await get_tree().create_timer(0).timeout
+
 				
 				

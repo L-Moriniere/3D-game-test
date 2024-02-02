@@ -28,8 +28,17 @@ func set_seed(val:String)->void:
 	custom_seed = val
 	seed(val.hash())
 
+@onready var exit_door_instance : PackedScene = preload("res://Scenes/ExitDoor.tscn")
+@export var exit_doors_number : int = 2
+var exit_door_count : int = 0
+
+
+
 var room_tiles : Array[PackedVector3Array] = []
 var room_positions : PackedVector3Array = []
+
+
+
 
 func visualize_border():
 	#faire les bordure selon la taille indiquée
@@ -45,12 +54,12 @@ func generate():
 	room_positions.clear()
 	if custom_seed : set_seed(custom_seed)
 	
+	print(get_random_rooms())
 	visualize_border()
 	make_start_room()
 	for i in room_number:
 		make_room(room_recursion)
 		
-
 		
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
 	var room_pos_v2 : PackedVector2Array = []
@@ -235,5 +244,16 @@ func make_room(recursion : int):
 	room_positions.append(pos)
 	
 	
-	
+func get_random_rooms()->Array[int]:
+	var array_rooms : Array[int] = []
+
+	while array_rooms.size() < exit_doors_number:
+		var r : int = randi_range(1, room_number)
+
+		# Assurez-vous que la nouvelle valeur est distincte des valeurs déjà présentes dans le tableau
+		if r not in array_rooms:
+			array_rooms.append(r)
+
+	return array_rooms
+
 	
