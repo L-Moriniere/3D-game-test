@@ -304,9 +304,16 @@ func get_rand_exit_door_position(width, height):
 
 func get_exit_doors_position_in_rooms()-> Array[Vector3]:
 	var pos_v3i : Array[Vector3i] = grid_map.get_used_cells_by_item(4)
+	#ajouter au tableau les cases à coté pour avoit d'avoir un couloir a coté du porte
 	var pos_v3 : Array[Vector3]
 	for p in pos_v3i:
 		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z)))
+		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z)))
+		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z+1)))
+		pos_v3.append(Vector3(float(p.x-1), float(p.y), float(p.z)))
+		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z-1)))
+		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z+1)))
+		pos_v3.append(Vector3(float(p.x-1), float(p.y), float(p.z-1)))
 	
 	return pos_v3
 	
