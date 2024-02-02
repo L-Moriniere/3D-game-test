@@ -60,8 +60,9 @@ func generate():
 	for i in room_number:
 		make_room(room_recursion, random_room_exit_doors)
 		
-	print("room_pos : %s"%room_positions)
-		
+	var exit_doors_position : Array[Vector3] = get_exit_doors_position_in_rooms()
+	print(exit_doors_position)
+	print("pos : %s"% str(exit_doors_position))
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
 	var room_pos_v2 : PackedVector2Array = []
 	
@@ -113,10 +114,10 @@ func generate():
 				if survival_chance > kill:
 					hallway_graph.connect_points(p,c)
 			
-	create_hallways(hallway_graph)
+	create_hallways(hallway_graph, exit_doors_position)
 		
 #pour chaque connection entre 2 salles, trouver 2 door tiles et store les positions
-func create_hallways(hallway_graph : AStar2D):
+func create_hallways(hallway_graph : AStar2D, exit_doors_position : Array[Vector3]):
 	var hallways : Array[PackedVector3Array] = []
 	for p in hallway_graph.get_point_ids():
 		for c in hallway_graph.get_point_connections(p):
@@ -129,14 +130,15 @@ func create_hallways(hallway_graph : AStar2D):
 				
 				#on check la distance la plus courte
 				for t in room_from:
-					if t.distance_squared_to(room_positions[c]) < tile_from.distance_squared_to(room_positions[c]):
+					if t.distance_squared_to(room_positions[c]) < tile_from.distance_squared_to(room_positions[c]) && !exit_doors_position.has(t):
 						tile_from = t
 						
 				for t in room_to:
-					if t.distance_squared_to(room_positions[p]) < tile_to.distance_squared_to(room_positions[p]):
+					if t.distance_squared_to(room_positions[p]) < tile_to.distance_squared_to(room_positions[p]) && !exit_doors_position.has(t):
 						tile_to = t
 
 				var hallway : PackedVector3Array = [tile_from, tile_to]
+				printt("hallway : %s"% str(hallway))
 				hallways.append(hallway)
 				
 				#ajout des portes
@@ -228,19 +230,17 @@ func make_room(recursion : int, random_room_exit_doors : Array[int]):
 	var room : PackedVector3Array = []
 	
 	if random_room_exit_doors[0] == room_positions.size():
-		var exit_door_pos = get_exit_door_position(width, height)
+		var exit_door_pos = get_rand_exit_door_position(width, height)
 		for row in height:
 			for column in width:
 				var pos : Vector3i = start_pos + Vector3i(column, 0, row)
 				#index 0 car c'est l'index de la room tile
 				if row == exit_door_pos.z && column == exit_door_pos.x:
-					print("ok")
 					grid_map.set_cell_item(pos, 4)
 				else : 
 					grid_map.set_cell_item(pos, 0)
 				#store la position
 				room.append(pos)
-		printt("exit pos : %s"% str(exit_door_pos) , "rooms : %s" % str(random_room_exit_doors))
 				
 		if random_room_exit_doors.size() != 1:
 			random_room_exit_doors.remove_at(0)
@@ -278,7 +278,7 @@ func get_random_rooms()->Array[int]:
 	array_rooms.sort()
 	return array_rooms
 
-func get_exit_door_position(width, height):
+func get_rand_exit_door_position(width, height):
 	# Choisissez aléatoirement une des quatre bordures (0: haut, 1: droite, 2: bas, 3: gauche)
 	var border_room : int = randi_range(0, 3)
 
@@ -288,16 +288,25 @@ func get_exit_door_position(width, height):
 	# Générez une coordonnée le long de la bordure choisie
 	match border_room:
 		0:  # Haut
-			x = randi_range(1, width - 1)
+			x = randi_range(2, width - 2)
 			z = 0
 		1:  # Droite
 			x = width - 1
-			z = randi_range(1, height - 1)
+			z = randi_range(2, height - 2)
 		2:  # Bas
-			x = randi_range(1, width - 1)
+			x = randi_range(2, width - 2)
 			z = height - 1 
 		3:  # Gauche
 			x = 0
-			z = randi_range(1, height - 1)
+			z = randi_range(2, height - 2)
 			
 	return Vector3i(x,0,z)
+
+func get_exit_doors_position_in_rooms()-> Array[Vector3]:
+	var pos_v3i : Array[Vector3i] = grid_map.get_used_cells_by_item(4)
+	var pos_v3 : Array[Vector3]
+	for p in pos_v3i:
+		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z)))
+	
+	return pos_v3
+	
