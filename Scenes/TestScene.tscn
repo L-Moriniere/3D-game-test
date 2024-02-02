@@ -24,7 +24,6 @@ environment = SubResource("Environment_mh8f1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28396, -0.0487952, 0.0359819)
 room_number = 10
 room_margin = 3
-exit_doors_number = 2
 
 [node name="GridMap" parent="DunGen" index="0"]
 data = {

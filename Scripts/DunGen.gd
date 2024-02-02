@@ -60,6 +60,7 @@ func generate():
 	for i in room_number:
 		make_room(room_recursion, random_room_exit_doors)
 		
+	print("room_pos : %s"%room_positions)
 		
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
 	var room_pos_v2 : PackedVector2Array = []
@@ -228,17 +229,18 @@ func make_room(recursion : int, random_room_exit_doors : Array[int]):
 	
 	if random_room_exit_doors[0] == room_positions.size():
 		var exit_door_pos = get_exit_door_position(width, height)
-		printt(exit_door_pos)
 		for row in height:
 			for column in width:
 				var pos : Vector3i = start_pos + Vector3i(column, 0, row)
 				#index 0 car c'est l'index de la room tile
 				if row == exit_door_pos.z && column == exit_door_pos.x:
+					print("ok")
 					grid_map.set_cell_item(pos, 4)
 				else : 
 					grid_map.set_cell_item(pos, 0)
 				#store la position
 				room.append(pos)
+		printt("exit pos : %s"% str(exit_door_pos) , "rooms : %s" % str(random_room_exit_doors))
 				
 		if random_room_exit_doors.size() != 1:
 			random_room_exit_doors.remove_at(0)
@@ -261,6 +263,7 @@ func make_room(recursion : int, random_room_exit_doors : Array[int]):
 	var avg_z : float = start_pos.z + (float(height)/2)
 	var pos : Vector3 = Vector3(avg_x, 0, avg_z)
 	room_positions.append(pos)
+
 	
 	
 func get_random_rooms()->Array[int]:
@@ -279,22 +282,22 @@ func get_exit_door_position(width, height):
 	# Choisissez aléatoirement une des quatre bordures (0: haut, 1: droite, 2: bas, 3: gauche)
 	var border_room : int = randi_range(0, 3)
 
-	var x : int = 0
-	var z : int = 0
+	var x : int = 1
+	var z : int = 1
 
 	# Générez une coordonnée le long de la bordure choisie
 	match border_room:
 		0:  # Haut
-			x = randi_range(0, width)
+			x = randi_range(1, width - 1)
 			z = 0
 		1:  # Droite
-			x = width
-			z = randi_range(0, height)
+			x = width - 1
+			z = randi_range(1, height - 1)
 		2:  # Bas
-			x = randi_range(0, width)
-			z = height
+			x = randi_range(1, width - 1)
+			z = height - 1 
 		3:  # Gauche
 			x = 0
-			z = randi_range(0, height)
+			z = randi_range(1, height - 1)
 			
 	return Vector3i(x,0,z)
