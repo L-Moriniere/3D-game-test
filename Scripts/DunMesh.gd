@@ -81,7 +81,6 @@ func create_dungeon():
 			
 			if array_doors_3v[0] == dun_cell.position:
 					var dir : String = dun_cell.get_children()[1].name.get_slice("_", 1)
-					print(dir)
 					dun_cell.call("add_exit_door_"+dir)
 					if array_doors_3v.size() != 1:
 						array_doors_3v.remove_at(0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bc7x4wyxclnv3"]
 
-[ext_resource type="Script" path="res://Scripts/Door.gd" id="1_2ty6v"]
+[ext_resource type="Script" path="res://Scripts/ExitDoor.gd" id="1_2ty6v"]
 [ext_resource type="PackedScene" uid="uid://bphbcbja2siyf" path="res://Models/door.glb" id="2_3wpdg"]
 [ext_resource type="PackedScene" uid="uid://ft81uo6qvpnt" path="res://System/Interaction/Interactable.tscn" id="3_o5owf"]
 

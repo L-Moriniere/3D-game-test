@@ -1,7 +1,7 @@
 extends Area3D
 
-@onready var start_position : Node3D = $"../PositionPlayerEnter"
-@onready var player : CharacterBody3D = $"../Character"
+@onready var start_position : Node3D = get_node("/root/Main/PositionPlayerEnter")
+@onready var player : CharacterBody3D = get_node("/root/Main/Character")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

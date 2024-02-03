@@ -44,6 +44,9 @@ size = Vector3(7.40332, 0.198364, 18.8609)
 [node name="PositionPlayerEnter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55113, 0.100908, 1.52819)
 
+[node name="PositionPlayerExit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29854, 0.100908, 5.0622)
+
 [node name="lantern" parent="." instance=ExtResource("4_fmtge")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 2.30138)
 
