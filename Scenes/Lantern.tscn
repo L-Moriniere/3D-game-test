@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwyu2l34cd7ih"]
+
+[ext_resource type="PackedScene" uid="uid://gxsr3cyqljs2" path="res://Models/lantern.glb" id="1_n1kmp"]
+[ext_resource type="Material" uid="uid://dogt7gmvynypt" path="res://Materials/ceiling.tres" id="2_hvwhu"]
+
+[node name="lantern" instance=ExtResource("1_n1kmp")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.072, 0)
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_hvwhu")
+
+[node name="chain" parent="Plane" index="0"]
+surface_material_override/0 = ExtResource("2_hvwhu")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.739406, 0)
+light_color = Color(1, 0.701961, 0.164706, 1)
+shadow_enabled = true
+shadow_bias = 0.2
+omni_range = 8.0

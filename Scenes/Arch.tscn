@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmvvgc3bvb0ye"]
+
+[ext_resource type="Script" path="res://Scripts/Arch.gd" id="1_8b1qw"]
+[ext_resource type="PackedScene" uid="uid://cfah5tqacri37" path="res://Models/SmallArch_Blend.glb" id="1_jn6mo"]
+[ext_resource type="PackedScene" uid="uid://ft81uo6qvpnt" path="res://System/Interaction/Interactable.tscn" id="2_rqeck"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfd7b"]
+size = Vector3(2.07542, 2.93896, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a3eus"]
+size = Vector3(2.3808, 2.95358, 0.290051)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikk3x"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Arch" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.244868, 0)
+script = ExtResource("1_8b1qw")
+
+[node name="SmallArch_Blend" parent="." instance=ExtResource("1_jn6mo")]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 1.31807, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00827789, 0.969482, 0)
+shape = SubResource("BoxShape3D_hfd7b")
+
+[node name="Interactable" parent="." instance=ExtResource("2_rqeck")]
+
+[node name="CollisionShape3D" parent="Interactable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.144152, 0.97966, -0.051752)
+shape = SubResource("BoxShape3D_a3eus")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.793045, 0.609163, 0, -0.609163, 0.793045, 0, 0, 0, 1, -0.105335, 0.283167, -0.192084)
+use_collision = true
+size = Vector3(2.80046, 2.88623, 0.001)
+material = SubResource("StandardMaterial3D_ikk3x")
+
+[connection signal="focused" from="Interactable" to="." method="_on_interactable_focused"]
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+[connection signal="unfocused" from="Interactable" to="." method="_on_interactable_unfocused"]
+
+[editable path="Interactable"]
