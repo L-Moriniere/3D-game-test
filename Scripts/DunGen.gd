@@ -55,14 +55,12 @@ func generate():
 	if custom_seed : set_seed(custom_seed)
 	var random_room_exit_doors : Array[int] = get_random_rooms()
 	visualize_border()
-	print("----")
+
 	make_start_room()
 	for i in room_number:
 		make_room(room_recursion, random_room_exit_doors)
 		
 	var exit_doors_position : Array[Vector3] = get_exit_doors_position_in_rooms()
-	print(exit_doors_position)
-	print("pos : %s"% str(exit_doors_position))
 	#pour faire les couloirs il faut utiliser la fonction de triangulation de delauney qui se fait sur des vector2
 	var room_pos_v2 : PackedVector2Array = []
 	
@@ -138,7 +136,6 @@ func create_hallways(hallway_graph : AStar2D, exit_doors_position : Array[Vector
 						tile_to = t
 
 				var hallway : PackedVector3Array = [tile_from, tile_to]
-				printt("hallway : %s"% str(hallway))
 				hallways.append(hallway)
 				
 				#ajout des portes
@@ -304,16 +301,16 @@ func get_rand_exit_door_position(width, height):
 
 func get_exit_doors_position_in_rooms()-> Array[Vector3]:
 	var pos_v3i : Array[Vector3i] = grid_map.get_used_cells_by_item(4)
-	#ajouter au tableau les cases à coté pour avoit d'avoir un couloir a coté du porte
+	#ajouter au tableau les cases à coté pour eviter d'avoir un couloir a coté du porte
 	var pos_v3 : Array[Vector3]
 	for p in pos_v3i:
 		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z)))
-		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z)))
-		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z+1)))
 		pos_v3.append(Vector3(float(p.x-1), float(p.y), float(p.z)))
+		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z)))
 		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z-1)))
-		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z+1)))
+		pos_v3.append(Vector3(float(p.x), float(p.y), float(p.z+1)))
 		pos_v3.append(Vector3(float(p.x-1), float(p.y), float(p.z-1)))
+		pos_v3.append(Vector3(float(p.x+1), float(p.y), float(p.z+1)))
 	
 	return pos_v3
 	
