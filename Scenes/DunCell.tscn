@@ -1,9 +1,9 @@
 [gd_scene load_steps=35 format=3 uid="uid://cbed6efcl7lu7"]
 
 [ext_resource type="Script" path="res://Scripts/DunCell.gd" id="1_r5tjc"]
-[ext_resource type="Material" path="res://Models/floor.tres" id="2_e56mh"]
-[ext_resource type="Material" uid="uid://djxm6j1cm3mhi" path="res://Models/walls.tres" id="3_nf66d"]
-[ext_resource type="Material" path="res://Models/ceiling.tres" id="4_h0j6e"]
+[ext_resource type="Material" uid="uid://dgw3ja14i3vne" path="res://Materials/floor.tres" id="2_e56mh"]
+[ext_resource type="Material" uid="uid://djxm6j1cm3mhi" path="res://Materials/walls.tres" id="3_nf66d"]
+[ext_resource type="Material" uid="uid://dogt7gmvynypt" path="res://Materials/ceiling.tres" id="4_h0j6e"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8fsmp"]
 _surfaces = [{

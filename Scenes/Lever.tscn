@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://cfs2ucf44y5og"]
 
 [ext_resource type="Script" path="res://Scripts/lever.gd" id="1_bces0"]
-[ext_resource type="Material" uid="uid://djxm6j1cm3mhi" path="res://Models/walls.tres" id="2_l4tsv"]
+[ext_resource type="Material" uid="uid://djxm6j1cm3mhi" path="res://Materials/walls.tres" id="2_l4tsv"]
 [ext_resource type="PackedScene" uid="uid://ft81uo6qvpnt" path="res://System/Interaction/Interactable.tscn" id="2_y6t4p"]
-[ext_resource type="Material" path="res://Models/floor.tres" id="3_thks4"]
+[ext_resource type="Material" uid="uid://dgw3ja14i3vne" path="res://Materials/floor.tres" id="3_thks4"]
 
 [sub_resource type="Animation" id="Animation_bhjq4"]
 length = 0.001

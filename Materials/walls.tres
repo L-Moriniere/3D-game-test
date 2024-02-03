@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://djxm6j1cm3mhi"]
 
-[ext_resource type="Texture2D" uid="uid://huc052xwvnuq" path="res://Models/DunCell_TexturesCom_MixedMedievalBricks_1K_albedo.png" id="1_po138"]
-[ext_resource type="Texture2D" uid="uid://pvcdfq7dtuvs" path="res://Models/DunCell_TexturesCom_MixedMedievalBricks_1K_normals.png" id="2_bo2jh"]
+[ext_resource type="Texture2D" uid="uid://huc052xwvnuq" path="res://Materials/DunCell_TexturesCom_MixedMedievalBricks_1K_albedo.png" id="1_po138"]
+[ext_resource type="Texture2D" uid="uid://pvcdfq7dtuvs" path="res://Materials/DunCell_TexturesCom_MixedMedievalBricks_1K_normals.png" id="2_bo2jh"]
 
 [resource]
 resource_name = "walls"

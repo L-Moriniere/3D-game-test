@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkg7jbmwlbl8g"
-path.s3tc="res://.godot/imported/DunCell_TexturesCom_Cement_1x1_512_normals.png-bf3a21efbcb0a98f54e6a6abff463247.s3tc.ctex"
+uid="uid://cvewhq4x36jhm"
+path.s3tc="res://.godot/imported/DunCell_TexturesCom_Pavement_CobblestoneStreet5_2x2_1K_albedo.png-a12d1113bb4c8af34ae3a5c242e27090.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Models/DunCell_TexturesCom_Cement_1x1_512_normals.png"
-dest_files=["res://.godot/imported/DunCell_TexturesCom_Cement_1x1_512_normals.png-bf3a21efbcb0a98f54e6a6abff463247.s3tc.ctex"]
+source_file="res://Materials/DunCell_TexturesCom_Pavement_CobblestoneStreet5_2x2_1K_albedo.png"
+dest_files=["res://.godot/imported/DunCell_TexturesCom_Pavement_CobblestoneStreet5_2x2_1K_albedo.png-a12d1113bb4c8af34ae3a5c242e27090.s3tc.ctex"]
 
 [params]
 
@@ -21,12 +21,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://imports/DunCell_TexturesCom_Cement_1x1_512_normals.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

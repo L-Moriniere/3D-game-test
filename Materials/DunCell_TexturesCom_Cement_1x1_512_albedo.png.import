@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8ocryd8rlvu3"
-path.s3tc="res://.godot/imported/door_DoorUV.png-567c9ab64f14797179ac348808d39ca3.s3tc.ctex"
+uid="uid://pypg3e77tne3"
+path.s3tc="res://.godot/imported/DunCell_TexturesCom_Cement_1x1_512_albedo.png-7244edb3df6ce0537d9aac63da61976b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Models/door_DoorUV.png"
-dest_files=["res://.godot/imported/door_DoorUV.png-567c9ab64f14797179ac348808d39ca3.s3tc.ctex"]
+source_file="res://Materials/DunCell_TexturesCom_Cement_1x1_512_albedo.png"
+dest_files=["res://.godot/imported/DunCell_TexturesCom_Cement_1x1_512_albedo.png-7244edb3df6ce0537d9aac63da61976b.s3tc.ctex"]
 
 [params]
 
