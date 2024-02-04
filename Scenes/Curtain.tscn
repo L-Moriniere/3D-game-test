@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dphvp3tp8xarw"]
+
+[ext_resource type="PackedScene" uid="uid://bx5rl1n7jgqkc" path="res://Models/curtain.glb" id="1_sssjc"]
+
+[node name="Curtain" type="Node3D" groups=["decoration"]]
+
+[node name="curtain" parent="." instance=ExtResource("1_sssjc")]

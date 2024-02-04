@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://np7kcrva506h"]
+
+[ext_resource type="PackedScene" uid="uid://xx1gijnnyxtv" path="res://Models/hourglass.glb" id="1_7pb6b"]
+
+[node name="Hourglass" type="Node3D" groups=["decoration"]]
+
+[node name="hourglass" parent="." instance=ExtResource("1_7pb6b")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.1, 0)
+
+[editable path="hourglass"]

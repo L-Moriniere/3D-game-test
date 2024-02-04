@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcrro2k7bqv2x"]
+
+[ext_resource type="PackedScene" uid="uid://bpaajlwty0da8" path="res://Models/egypt_column.glb" id="1_8j3d8"]
+
+[node name="Column" type="Node3D" groups=["decoration"]]
+transform = Transform3D(17, 0, 0, 0, 17, 0, 0, 0, 17, 0, 0, 0)
+
+[node name="egypt_column" parent="." instance=ExtResource("1_8j3d8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.00350315, 0)

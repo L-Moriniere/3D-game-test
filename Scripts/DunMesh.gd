@@ -4,8 +4,12 @@ extends Node3D
 @export var grid_map_path : NodePath
 @onready var grid_map : GridMap = get_node(grid_map_path)
 @onready var lantern_instance = preload("res://Scenes/Lantern.tscn")
-@export_range(0,1) var survival_chance_lantern : float = 0.15
+@export_range(0,1) var survival_chance_lantern : float = 0.05
 
+@export var number_object_to_place : int = 20
+@export var min_distance_object : float = 3.0
+var decoration_floor_pool : Array[PackedScene] = [preload("res://Scenes/Coffin.tscn"), preload("res://Scenes/Sphinx.tscn"),\
+ preload("res://Scenes/Hourglass.tscn"), preload("res://Scenes/Lantern.tscn"), preload("res://Scenes/Column.tscn")]
 
 
 @export var start : bool = false : set = set_start
@@ -57,13 +61,13 @@ func create_dungeon():
 			var dun_cell : Node3D = dun_cell_scene.instantiate()
 			dun_cell.position = Vector3(cell) + Vector3(0.5, 0, 0.5)
 			#si c'est une salle
-			if cell_index == 0:
+			#if cell_index == 0:
 				#ajout lanterne
-				var kill : float = randf()
-				if survival_chance_lantern > kill:
-					var lantern : Node3D = lantern_instance.instantiate()
-					dun_cell.add_child(lantern)
-					
+				#var kill : float = randf()
+				#if survival_chance_lantern > kill:
+					#var lantern : Node3D = lantern_instance.instantiate()
+					#dun_cell.add_child(lantern)
+					#
 							
 			
 			t += 1
@@ -89,6 +93,27 @@ func create_dungeon():
 			add_child(dun_cell)
 			dun_cell.set_owner(owner)
 		if t%10 == 9 : await get_tree().create_timer(0).timeout
-
+	place_objects()
+	
+	
+func place_objects():
+	var object_placed : int = 0
+	
+	while object_placed < number_object_to_place:
+		var selected_decoration_floor : PackedScene = decoration_floor_pool[randi() % decoration_floor_pool.size()]
+		var grid_position : Vector3i = Vector3i(grid_map.get_used_cells_by_item(0)[randi() % grid_map.get_used_cells_by_item(0).size()])
+		var position_object : Vector3 = grid_map.map_to_local(grid_position)
+		if check_min_distance_object(position_object):
+			var new_deco : Node3D = selected_decoration_floor.instantiate()
+			new_deco.position = position_object
+			add_child(new_deco)
+			object_placed += 1
 				
 				
+func check_min_distance_object(new_position)->bool:
+	for child in get_children():
+		if child.is_in_group("decoration"):
+			var distance = new_position.distance_to(child.position)
+			if distance < min_distance_object:
+				return false
+	return true

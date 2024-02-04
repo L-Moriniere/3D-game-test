@@ -3,10 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://gxsr3cyqljs2" path="res://Models/lantern.glb" id="1_n1kmp"]
 [ext_resource type="Material" uid="uid://dogt7gmvynypt" path="res://Materials/ceiling.tres" id="2_hvwhu"]
 
-[node name="lantern" instance=ExtResource("1_n1kmp")]
+[node name="lantern" groups=["decoration"] instance=ExtResource("1_n1kmp")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.072, 0)
 
 [node name="Plane" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 0)
 surface_material_override/0 = ExtResource("2_hvwhu")
 
 [node name="chain" parent="Plane" index="0"]
