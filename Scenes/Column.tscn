@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcrro2k7bqv2x"]
+[gd_scene load_steps=3 format=3 uid="uid://dcrro2k7bqv2x"]
 
 [ext_resource type="PackedScene" uid="uid://bpaajlwty0da8" path="res://Models/egypt_column.glb" id="1_8j3d8"]
 
-[node name="Column" type="Node3D" groups=["decoration"]]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mptox"]
+size = Vector3(0.0402486, 0.12133, 0.0442669)
+
+[node name="Column" type="StaticBody3D" groups=["decoration"]]
 transform = Transform3D(17, 0, 0, 0, 17, 0, 0, 0, 17, 0, 0, 0)
 
 [node name="egypt_column" parent="." instance=ExtResource("1_8j3d8")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.00350315, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000468612, 0.0648842, 0.000751376)
+shape = SubResource("BoxShape3D_mptox")
