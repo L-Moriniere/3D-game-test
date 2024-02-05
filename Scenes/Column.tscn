@@ -3,14 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://bpaajlwty0da8" path="res://Models/egypt_column.glb" id="1_8j3d8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mptox"]
-size = Vector3(0.0402486, 0.12133, 0.0442669)
+size = Vector3(0.596706, 1.44147, 0.618)
 
 [node name="Column" type="StaticBody3D" groups=["decoration"]]
-transform = Transform3D(17, 0, 0, 0, 17, 0, 0, 0, 17, 0, 0, 0)
 
 [node name="egypt_column" parent="." instance=ExtResource("1_8j3d8")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.00350315, 0)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0.069404, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000468612, 0.0648842, 0.000751376)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160543, 0.724952, -0.00356127)
 shape = SubResource("BoxShape3D_mptox")
