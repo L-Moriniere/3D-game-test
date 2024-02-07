@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://fqxxsa4ag5da"]
+
+[ext_resource type="PackedScene" uid="uid://dwtilnde04e2f" path="res://Models/pillar.glb" id="1_x77a0"]
+
+[node name="Pillar" type="Node3D" groups=["decoration"]]
+
+[node name="pillar" parent="." instance=ExtResource("1_x77a0")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)

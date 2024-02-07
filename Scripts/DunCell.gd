@@ -28,7 +28,6 @@ func add_exit_door_up():
 func add_exit_door_left():
 	var door : Area3D = exit_door_instance.instantiate()
 	door.position = Vector3(-0.43,0,0)
-	door.rotation_degrees = Vector3(0,0,0)
 	add_child(door)
 	
 func add_exit_door_down():

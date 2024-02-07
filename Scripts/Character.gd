@@ -40,7 +40,7 @@ func _physics_process(delta):
 		if crouched:
 			var space_state = get_world_3d().direct_space_state
 			#verifie qu'il n'y a pas de collisions au dessus, si il n'y en le character peut se relever
-			var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(position, position + Vector3(0,2,0), 1, [self]))
+			var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(position, position + Vector3(0,1,0), 1, [self]))
 			if result.size() == 0:
 				$AnimationPlayer.play("uncrouch")
 				crouched = false
