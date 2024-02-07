@@ -46,9 +46,6 @@ func create_dungeon():
 		remove_child(c)
 		c.queue_free()
 	var t : int = 0
-	#var number_cell_room : int = grid_map.get_used_cells_by_item(0).size()
-	#var rand_cell : int = randi_range(0, number_cell_room)
-	#var count_cell : int = 0
 	var array_doors_3vi : Array[Vector3i] = grid_map.get_used_cells_by_item(4)
 	var array_doors_3v : Array[Vector3] = []
 	for door in array_doors_3vi:
@@ -87,23 +84,23 @@ func create_dungeon():
 	
 	
 	
-# Définissez la fonction de filtrage personnalisée
-func filterCellsWithChildren(cells, targetChildren):
-	var filteredCells = []
+#avoir que les noeuds avec des murs
+func filter_cell_with_walls(cells, name_walls):
+	var filtered_cells : Array = []
 
 	for cell in cells:
 		# Vérifiez si le cell a un des enfants cibles
-		var hasTargetChild = false
+		var has_target_child : bool = false
 		for child in cell.get_children():
-			if child.get_name() in targetChildren:
-				hasTargetChild = true
+			if child.get_name() in name_walls:
+				has_target_child = true
 				break
 
 		# Ajoutez le cell à la liste filtrée s'il a un des enfants cibles
-		if hasTargetChild:
-			filteredCells.append(cell)
+		if has_target_child:
+			filtered_cells.append(cell)
 
-	return filteredCells
+	return filtered_cells
 
 
 
@@ -111,37 +108,30 @@ func filterCellsWithChildren(cells, targetChildren):
 
 	
 func place_objects():
-	var cells_wall_unfiltered = get_tree().get_nodes_in_group("has_wall")
-	var wall_children = ["wall_right", "wall_left", "wall_up", "wall_down"]
-	var cells_wall = filterCellsWithChildren(cells_wall_unfiltered, wall_children)
-
-	var object_placed : int = 0
-	var cells_hallways_doors : Array[Vector3i] = grid_map.get_used_cells_by_item(1)
-	cells_hallways_doors.append_array(grid_map.get_used_cells_by_item(2))
-	
+	var cells_wall_unfiltered : Array[Node] = get_tree().get_nodes_in_group("has_wall")
+	var wall_children : Array[String] = ["wall_right", "wall_left", "wall_up", "wall_down"]
+	var cells_wall = filter_cell_with_walls(cells_wall_unfiltered, wall_children)
+	var cells_wall_pos : Array[Vector3]
 	for c in cells_wall:
-		if cells_hallways_doors.has(Vector3i(c.position)):
-			cells_wall.remove_at(cells_wall.find(c))
-
-	
-
-	while object_placed < number_object_to_place:
-		var selected_decoration_floor : PackedScene = decoration_floor_pool[randi() % decoration_floor_pool.size()]
-		var selected_decoration_wall : PackedScene = decoration_wall_pool[randi() % decoration_wall_pool.size()]
-		
+		cells_wall_pos.append(c.position)
+	var object_placed : int = 0
+	while object_placed < number_object_to_place:		
 		var rand : int = randi_range(1,2)
 		#objets au sol
 		if rand == 1:
+			var selected_decoration_floor : PackedScene = decoration_floor_pool[randi() % decoration_floor_pool.size()]
 			var grid_position : Vector3i = Vector3i(grid_map.get_used_cells_by_item(0)[randi() % grid_map.get_used_cells_by_item(0).size()])
 			var position_object : Vector3 = grid_map.map_to_local(grid_position)
-			if check_min_distance_object(position_object):
-				var new_deco : Node3D = selected_decoration_floor.instantiate()
-				add_child(new_deco)
-				new_deco.global_position = position_object
+			if !cells_wall_pos.has(position_object):
+				if check_min_distance_object(position_object):
+					var new_deco : Node3D = selected_decoration_floor.instantiate()
+					add_child(new_deco)
+					new_deco.global_position = position_object
 
-				object_placed += 1
+					object_placed += 1
 		#objets collés au mur
 		else:
+			var selected_decoration_wall : PackedScene = decoration_wall_pool[randi() % decoration_wall_pool.size()]
 			var cell : Node = cells_wall.pick_random()
 			var position_object : Vector3 = cell.position
 			if check_min_distance_object(position_object):
@@ -155,8 +145,6 @@ func place_objects():
 					"left": new_deco.rotation_degrees = Vector3(0,90,0)
 					
 				new_deco.global_position = position_object
-				print(new_deco.rotation)
-
 				object_placed += 1
 		
 			cells_wall.erase(cell)
